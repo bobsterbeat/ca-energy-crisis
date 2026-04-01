@@ -32,9 +32,9 @@ export default function Landing({onNavigate}){
 return(
 <div style={{maxWidth:900,margin:"0 auto",padding:"40px 24px"}}>
 <div style={{textAlign:"center",marginBottom:40}}>
-<div style={{fontSize:12,color:C.amber,textTransform:"uppercase",letterSpacing:4,marginBottom:12,fontWeight:600}}>Interactive Policy Analysis \u2014 March 2026</div>
+<div style={{fontSize:12,color:C.amber,textTransform:"uppercase",letterSpacing:4,marginBottom:12,fontWeight:600}}>Interactive Policy Analysis — March 2026</div>
 <h1 style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:38,fontWeight:900,color:C.white,lineHeight:1.1,marginBottom:16}}>California:<br/>A State of Crisis?</h1>
-<p style={{fontSize:17,color:"#CBD5E1",maxWidth:620,margin:"0 auto",lineHeight:1.6}}>16 interactive dashboards examining California's most pressing policy failures \u2014 and the pattern that connects them all. Data-driven. Source-cited. Balanced where possible. Blunt where necessary.</p>
+<p style={{fontSize:17,color:"#CBD5E1",maxWidth:620,margin:"0 auto",lineHeight:1.6}}>16 interactive dashboards examining California's most pressing policy failures — and the pattern that connects them all. Data-driven. Source-cited. Balanced where possible. Blunt where necessary.</p>
 </div>
 
 {sections.map(function(sec,si){return(
@@ -58,7 +58,7 @@ return(
 
 <div style={{background:C.card,borderRadius:10,padding:24,border:"1px solid "+C.purple+"55",marginTop:20}}>
 <h2 style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:22,color:C.purple,marginBottom:12}}>The Pattern</h2>
-<p style={{fontSize:16,color:C.white,lineHeight:1.7,marginBottom:14}}>Across gasoline, electricity, water, housing, insurance, and business \u2014 the same playbook repeats:</p>
+<p style={{fontSize:16,color:C.white,lineHeight:1.7,marginBottom:14}}>Across gasoline, electricity, water, housing, insurance, and business — the same playbook repeats:</p>
 <div style={{display:"flex",flexWrap:"wrap",gap:10}}>
 {[
 {step:"1. Regulate heavily",color:C.coral},
