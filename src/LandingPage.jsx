@@ -18,6 +18,7 @@ var sections=[
 {id:"rail",icon:"\uD83D\uDE84",title:"High-Speed Rail",stat:"$126B, 0 riders",accent:C.orange,desc:"18 years, $18B spent. Zero passengers. Zero track laid."},
 {id:"edu",icon:"\uD83C\uDF93",title:"Education",stat:"16th spending",accent:C.blue,desc:"Spending more per pupil but 31st adjusted. UC system is world-class."},
 {id:"crime",icon:"\uD83D\uDEA8",title:"Crime",stat:"Record lows*",accent:C.purple,desc:"Data says safer. Experience says worse. Accountability collapsed."},
+{id:"infra",icon:"\uD83D\uDEA7",title:"Infrastructure",stat:"Grade C-",accent:C.orange,desc:"$216B funding gap. 30% of roads poor. 65% of bridges past design life."},
 ]},
 {cat:"Migration",items:[
 {id:"exodus",icon:"\uD83D\uDCE6",title:"The Exodus",stat:"-367K (2021)",accent:C.coral,desc:"1.7M residents gone. Companies, tax revenue, talent leaving."},
@@ -30,7 +31,7 @@ return(
 <div style={{textAlign:"center",marginBottom:40}}>
 <div style={{fontSize:12,color:C.amber,textTransform:"uppercase",letterSpacing:4,marginBottom:12,fontWeight:600}}>Interactive Policy Analysis \u2014 March 2026</div>
 <h1 style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:38,fontWeight:900,color:C.white,lineHeight:1.1,marginBottom:16}}>California:<br/>A State of Crisis?</h1>
-<p style={{fontSize:17,color:"#CBD5E1",maxWidth:620,margin:"0 auto",lineHeight:1.6}}>14 interactive dashboards examining California's most pressing policy failures \u2014 and the pattern that connects them all. Data-driven. Source-cited. Balanced where possible. Blunt where necessary.</p>
+<p style={{fontSize:17,color:"#CBD5E1",maxWidth:620,margin:"0 auto",lineHeight:1.6}}>15 interactive dashboards examining California's most pressing policy failures \u2014 and the pattern that connects them all. Data-driven. Source-cited. Balanced where possible. Blunt where necessary.</p>
 </div>
 
 {sections.map(function(sec,si){return(
