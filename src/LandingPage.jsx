@@ -25,6 +25,9 @@ var sections=[
 ]},
 {cat:"Migration",items:[
 {id:"exodus",icon:"\uD83D\uDCE6",title:"The Exodus",stat:"-367K (2021)",accent:C.coral,desc:"1.7M residents gone. Companies, tax revenue, talent leaving."},
+]},
+{cat:"Conclusions",items:[
+{id:"conclusion",icon:"\uD83C\uDFAF",title:"Conclusions",stat:"The Pattern",accent:C.purple,desc:"16 crises. One pattern. What caused them, who benefits, and what would fix them."},
 ]}
 ];
 
