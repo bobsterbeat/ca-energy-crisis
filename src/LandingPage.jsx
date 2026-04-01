@@ -23,6 +23,9 @@ var sections=[
 {cat:"Root Cause",items:[
 {id:"ceqa",icon:"\uD83D\uDCCB",title:"CEQA",stat:"55 years",accent:C.amber,desc:"One 1970 law. 55 years unreformed. The hidden engine behind every crisis on this site."},
 ]},
+{cat:"Governance",items:[
+{id:"politics",icon:"\uD83C\uDFDB\uFE0F",title:"Political Structure",stat:"13 years",accent:C.purple,desc:"One-party supermajority. Union-funded campaigns. Gerrymandered maps. No accountability."},
+]},
 {cat:"Migration",items:[
 {id:"exodus",icon:"\uD83D\uDCE6",title:"The Exodus",stat:"-367K (2021)",accent:C.coral,desc:"1.7M residents gone. Companies, tax revenue, talent leaving."},
 ]},
