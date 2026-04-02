@@ -25,12 +25,17 @@ var sections=[
 ]},
 {cat:"Governance",items:[
 {id:"politics",icon:"\uD83C\uDFDB\uFE0F",title:"Political Structure",stat:"13 years",accent:C.purple,desc:"One-party supermajority. Union-funded campaigns. Gerrymandered maps. No accountability."},
+{id:"fraud",icon:"\uD83D\uDCB8",title:"Fraud, Waste & Abuse",stat:"$20B+ EDD",accent:C.coral,desc:"$20B in pandemic fraud. 280+ hospice licenses revoked. The real numbers and the inflated ones."},
+]},
+{cat:"Health & Demographics",items:[
+{id:"healthcare",icon:"\uD83C\uDFE5",title:"Healthcare Financing",stat:"14.5M on Medi-Cal",accent:C.teal,desc:"How Medicare, Medi-Cal, and private insurance actually work — and why the cross-subsidy is breaking."},
+{id:"immigration",icon:"\uD83C\uDF0E",title:"Immigration & Population",stat:"10.9M immigrants",accent:C.orange,desc:"1.46M domestic out-migration vs. 934K international arrivals. The fiscal math no one has formally studied."},
 ]},
 {cat:"Migration",items:[
 {id:"exodus",icon:"\uD83D\uDCE6",title:"The Exodus",stat:"-367K (2021)",accent:C.coral,desc:"1.7M residents gone. Companies, tax revenue, talent leaving."},
 ]},
 {cat:"Conclusions",items:[
-{id:"conclusion",icon:"\uD83C\uDFAF",title:"Conclusions",stat:"The Pattern",accent:C.purple,desc:"16 crises. One pattern. What caused them, who benefits, and what would fix them."},
+{id:"conclusion",icon:"\uD83C\uDFAF",title:"Conclusions",stat:"The Pattern",accent:C.purple,desc:"20 crises. One pattern. What caused them, who benefits, and what would fix them."},
 ]}
 ];
 
@@ -40,7 +45,7 @@ return(
 <div style={{textAlign:"center",marginBottom:40}}>
 <div style={{fontSize:12,color:C.amber,textTransform:"uppercase",letterSpacing:4,marginBottom:12,fontWeight:600}}>Interactive Policy Analysis — March 2026</div>
 <h1 style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:38,fontWeight:900,color:C.white,lineHeight:1.1,marginBottom:16}}>California:<br/>A State of Crisis?</h1>
-<p style={{fontSize:17,color:"#CBD5E1",maxWidth:620,margin:"0 auto",lineHeight:1.6}}>16 interactive dashboards examining California's most pressing policy failures — and the pattern that connects them all. Data-driven. Source-cited. Balanced where possible. Blunt where necessary.</p>
+<p style={{fontSize:17,color:"#CBD5E1",maxWidth:620,margin:"0 auto",lineHeight:1.6}}>20 interactive dashboards examining California's most pressing policy failures — and the pattern that connects them all. Data-driven. Source-cited. Balanced where possible. Blunt where necessary.</p>
 </div>
 
 {sections.map(function(sec,si){return(
