@@ -1,0 +1,37 @@
+name: Update gas & electricity prices
+
+on:
+  schedule:
+    # Tuesday 03:00 UTC = Monday 8pm Pacific (after EIA Monday-afternoon publish)
+    - cron: "0 3 * * 2"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch latest prices from EIA
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: node scripts/update-prices.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/prices.json
+          if git diff --staged --quiet; then
+            echo "No price change."
+          else
+            git commit -m "chore: refresh gasoline & electricity prices from EIA"
+            git push
+          fi
