@@ -2,15 +2,17 @@
   "lastUpdated": "2026-04-25",
   "source": "U.S. Energy Information Administration (EIA)",
   "gasoline": {
-    "ca": 5.90,
-    "us": 3.97,
-    "tx": 3.10,
-    "asOf": "April 2026"
+    "ca": 5.65,
+    "us": 4.04,
+    "tx": 3.59,
+    "asOf": "April 2026",
+    "period": "2026-04-20"
   },
   "electricity": {
-    "ca": 33.8,
-    "us": 18.1,
-    "tx": 16.2,
-    "asOf": "April 2026"
+    "ca": 33.2,
+    "us": 17.7,
+    "tx": 15.4,
+    "asOf": "February 2026",
+    "period": "2026-02"
   }
 }
