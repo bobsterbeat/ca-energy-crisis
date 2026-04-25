@@ -12,6 +12,7 @@ var sections=[
 {id:"housing",icon:"\uD83C\uDFE0",title:"Housing",stat:"$905K median",accent:C.purple,desc:"82% priced out. 3M unit shortage. 25 years to save."},
 {id:"insurance",icon:"\uD83D\uDD25",title:"Insurance",stat:"7 insurers left",accent:C.orange,desc:"Wildfires + Prop 103 = insurer exodus. FAIR Plan overwhelmed."},
 {id:"biz",icon:"\uD83C\uDFE2",title:"Business Climate",stat:"49th ranked",accent:C.orange,desc:"Worst tax climate. Highest regulation. 5th largest economy."},
+{id:"fastfood",icon:"🍔",title:"Fast-Food Wage",stat:"$20/hr",accent:C.coral,desc:"AB 1228 at two years. Six studies. Two opposite stories.",newUntil:"2026-05-01"},
 ]},
 {cat:"Social & Infrastructure",items:[
 {id:"homeless",icon:"\uD83D\uDECC",title:"Homelessness",stat:"183,000 people",accent:C.coral,desc:"$24B spent. Numbers went up. 7 die daily in LA County."},
@@ -19,6 +20,7 @@ var sections=[
 {id:"edu",icon:"\uD83C\uDF93",title:"Education",stat:"16th spending",accent:C.blue,desc:"Spending more per pupil but 31st adjusted. UC system is world-class."},
 {id:"crime",icon:"\uD83D\uDEA8",title:"Crime",stat:"Record lows*",accent:C.purple,desc:"Data says safer. Experience says worse. Accountability collapsed."},
 {id:"infra",icon:"\uD83D\uDEA7",title:"Infrastructure",stat:"Grade C-",accent:C.orange,desc:"$216B funding gap. 30% of roads poor. 65% of bridges past design life."},
+{id:"roadcharge",icon:"🛣️",title:"Road Charge",stat:"2.5¢/mile pilot",accent:C.blue,desc:"Gas tax is dying. The mileage-fee replacement: what's real and what isn't.",newUntil:"2026-05-01"},
 ]},
 {cat:"Root Cause",items:[
 {id:"ceqa",icon:"\uD83D\uDCCB",title:"CEQA",stat:"55 years",accent:C.amber,desc:"One 1970 law. 55 years unreformed. The hidden engine behind every crisis on this site."},
@@ -54,6 +56,7 @@ return(
 <div style={{display:"flex",flexWrap:"wrap",gap:14}}>
 {sec.items.map(function(s){return(
 <div key={s.id} onClick={function(){onNavigate(s.id);}} style={{flex:"1 1 200px",background:C.card,border:"1px solid "+C.border,borderRadius:10,padding:"18px 16px",cursor:"pointer",borderTop:"3px solid "+s.accent,transition:"transform 0.15s",position:"relative"}}>
+{s.newUntil&&new Date()<new Date(s.newUntil)&&(<div style={{position:"absolute",top:-8,right:-8,background:C.green,color:"#0F172A",fontSize:10,fontWeight:800,letterSpacing:1,padding:"3px 8px",borderRadius:4,textTransform:"uppercase",boxShadow:"0 2px 6px rgba(0,0,0,0.4)"}}>NEW</div>)}
 <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8}}>
 <div style={{fontSize:28}}>{s.icon}</div>
 <div style={{fontSize:12,color:s.accent,background:s.accent+"18",padding:"2px 8px",borderRadius:4,fontWeight:700}}>{s.stat}</div>
