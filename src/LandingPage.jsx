@@ -8,6 +8,7 @@ var sections=[
 {id:"elec",icon:"\u26A1",title:"Electricity",stat:"33.8\u00A2/kWh",accent:C.amber,desc:"Double the price, half the usage. Wildfire costs dominate."},
 {id:"water",icon:"\uD83D\uDCA7",title:"Water",stat:"80/20 split",accent:C.blue,desc:"80% to agriculture. Desal rejected. Drought overstated."},
 {id:"globe",icon:"\uD83C\uDF0D",title:"Supply Routes",stat:"12,300 nm",accent:C.cyan,desc:"3D globe showing the absurd journey of CA gasoline."},
+{id:"wildfires",icon:"🌲",title:"Wildfires & Forestry",stat:"$250B LA fires",accent:C.orange,desc:"PG&E liability, federal forest mismanagement, and the fires that reshaped the state.",newUntil:"2026-05-02"},
 ]},
 {cat:"Cost & Economy",items:[
 {id:"col",icon:"\uD83D\uDCB0",title:"Cost of Living",stat:"+42% premium",accent:C.amber,desc:"Highest taxes, gas, utilities, and groceries on the mainland."},
