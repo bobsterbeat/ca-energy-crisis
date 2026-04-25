@@ -53,7 +53,7 @@ const navigate=useNavigate();
 return(
 <div style={{maxWidth:900,margin:"0 auto",padding:"40px 24px"}}>
 <div style={{textAlign:"center",marginBottom:40}}>
-<div style={{fontSize:12,color:C.amber,textTransform:"uppercase",letterSpacing:4,marginBottom:12,fontWeight:600}}>Interactive Policy Analysis — March 2026</div>
+<div style={{fontSize:12,color:C.amber,textTransform:"uppercase",letterSpacing:4,marginBottom:12,fontWeight:600}}>Interactive Policy Analysis — {new Date().toLocaleString("en-US",{month:"long",year:"numeric"})}</div>
 <h1 style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:38,fontWeight:900,color:C.white,lineHeight:1.1,marginBottom:16}}>California:<br/>A State of Crisis?</h1>
 <p style={{fontSize:17,color:"#CBD5E1",maxWidth:620,margin:"0 auto",lineHeight:1.6}}>{sections.reduce(function(n,s){return n+s.items.length;},0)} interactive dashboards examining California's most pressing policy failures — and the pattern that connects them all. Data-driven. Source-cited. Balanced where possible. Blunt where necessary.</p>
 </div>
