@@ -30,6 +30,7 @@ var sections=[
 {id:"politics",icon:"\uD83C\uDFDB\uFE0F",title:"Political Structure",stat:"13 years",accent:C.purple,desc:"One-party supermajority. Union-funded campaigns. Gerrymandered maps. No accountability."},
 {id:"stategov",icon:"⚖️",title:"State Government",stat:"120 legislators",accent:C.cyan,desc:"Supermajority rules, propositions, money, and the legislative calendar.",newUntil:"2026-05-01"},
 {id:"unions",icon:"✊",title:"Labor & Power",stat:"2M members",accent:C.green,desc:"How California's labor movement shapes wage law and the legislative agenda.",newUntil:"2026-05-01"},
+{id:"gerrymandering",icon:"🗺️",title:"Gerrymandering 2026",stat:"6 states redrawn",accent:C.amber,desc:"The largest mid-decade redistricting cycle in 60 years. Texas, California, and four more.",newUntil:"2026-05-01"},
 {id:"fraud",icon:"\uD83D\uDCB8",title:"Fraud, Waste & Abuse",stat:"$20B+ EDD",accent:C.coral,desc:"$20B in pandemic fraud. 280+ hospice licenses revoked. The real numbers and the inflated ones."},
 ]},
 {cat:"Health & Demographics",items:[
