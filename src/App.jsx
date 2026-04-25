@@ -12,7 +12,7 @@ import CostOfLiving from "./CostOfLiving";
 import Education from "./Education";
 import Business from "./Business";
 import Crime from "./Crime";
-import LandingPage from "./LandingPage";
+import LandingPage, { CRISIS_COUNT } from "./LandingPage";
 import Infrastructure from "./Infrastructure";
 import CEQA from "./CEQA";
 import Conclusions from "./Conclusions";
@@ -81,7 +81,7 @@ const PAGE_META={
   crime:{title:"Crime: The Accountability Crisis | CA Policy",heroTitle:"Crime: The Accountability Crisis",description:"Prop 47 raised the theft threshold. Smash-and-grabs tripled. DA recall movements in 5 counties."},
   infra:{title:"Infrastructure: Grade C- | CA Policy",heroTitle:"Infrastructure: Grade C-",description:"$216B funding gap. 30% of roads poor. 65% of bridges past design life. The 5th largest economy on a D+ foundation."},
   ceqa:{title:"CEQA: The Law That Blocks Everything | CA Policy",heroTitle:"CEQA: The Law That Blocks Everything",description:"One 1970 law. 55 years unreformed. The hidden engine behind every crisis on this site."},
-  conclusion:{title:"Conclusions: The Pattern & The Path Forward | CA Policy",heroTitle:"Conclusions: The Pattern & The Path Forward",description:"20 crises. One pattern. What caused them, who benefits, and what would fix them."},
+  conclusion:{title:"Conclusions: The Pattern & The Path Forward | CA Policy",heroTitle:"Conclusions: The Pattern & The Path Forward",description:CRISIS_COUNT+" crises. One pattern. What caused them, who benefits, and what would fix them."},
   politics:{title:"Political Structure: Why Nothing Changes | CA Policy",heroTitle:"Political Structure: Why Nothing Changes",description:"One-party supermajority. Union-funded campaigns. Gerrymandered maps. And 13 years without accountability."},
   exodus:{title:"The California Exodus | CA Policy",heroTitle:"The California Exodus",description:"1.7 million residents gone since 2020. Companies, tax revenue, and talent following them out."},
   fraud:{title:"Fraud, Waste & Abuse | CA Policy",heroTitle:"Fraud, Waste & Abuse",description:"$20B in EDD fraud. 280+ hospice licenses revoked. $146B in estimated Medi-Cal losses. The real numbers and the inflated ones."},

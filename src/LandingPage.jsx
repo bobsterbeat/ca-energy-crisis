@@ -44,9 +44,12 @@ var sections=[
 {id:"exodus",icon:"\uD83D\uDCE6",title:"The Exodus",stat:"-367K (2021)",accent:C.coral,desc:"1.7M residents gone. Companies, tax revenue, talent leaving."},
 ]},
 {cat:"Conclusions",items:[
-{id:"conclusion",icon:"\uD83C\uDFAF",title:"Conclusions",stat:"The Pattern",accent:C.purple,desc:"20 crises. One pattern. What caused them, who benefits, and what would fix them."},
+{id:"conclusion",icon:"\uD83C\uDFAF",title:"Conclusions",stat:"The Pattern",accent:C.purple,desc:""},
 ]}
 ];
+
+export const CRISIS_COUNT=sections.reduce(function(n,s){return n+s.items.filter(function(i){return i.id!=="conclusion";}).length;},0);
+sections.forEach(function(s){s.items.forEach(function(i){if(i.id==="conclusion")i.desc=CRISIS_COUNT+" crises. One pattern. What caused them, who benefits, and what would fix them.";});});
 
 export default function Landing(){
 const navigate=useNavigate();
