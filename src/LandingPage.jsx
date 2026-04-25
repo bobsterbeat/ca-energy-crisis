@@ -13,6 +13,7 @@ var sections=[
 {id:"insurance",icon:"\uD83D\uDD25",title:"Insurance",stat:"7 insurers left",accent:C.orange,desc:"Wildfires + Prop 103 = insurer exodus. FAIR Plan overwhelmed."},
 {id:"biz",icon:"\uD83C\uDFE2",title:"Business Climate",stat:"49th ranked",accent:C.orange,desc:"Worst tax climate. Highest regulation. 5th largest economy."},
 {id:"fastfood",icon:"🍔",title:"Fast-Food Wage",stat:"$20/hr",accent:C.coral,desc:"AB 1228 at two years. Six studies. Two opposite stories.",newUntil:"2026-05-01"},
+{id:"healthcarewage",icon:"🩺",title:"Healthcare Wage",stat:"$25 by 2033",accent:C.teal,desc:"SB 525 sectoral minimum. Four tiers. Same target, very different timelines.",newUntil:"2026-05-01"},
 ]},
 {cat:"Social & Infrastructure",items:[
 {id:"homeless",icon:"\uD83D\uDECC",title:"Homelessness",stat:"183,000 people",accent:C.coral,desc:"$24B spent. Numbers went up. 7 die daily in LA County."},
@@ -27,6 +28,8 @@ var sections=[
 ]},
 {cat:"Governance",items:[
 {id:"politics",icon:"\uD83C\uDFDB\uFE0F",title:"Political Structure",stat:"13 years",accent:C.purple,desc:"One-party supermajority. Union-funded campaigns. Gerrymandered maps. No accountability."},
+{id:"stategov",icon:"⚖️",title:"State Government",stat:"120 legislators",accent:C.cyan,desc:"Supermajority rules, propositions, money, and the legislative calendar.",newUntil:"2026-05-01"},
+{id:"unions",icon:"✊",title:"Labor & Power",stat:"2M members",accent:C.green,desc:"How California's labor movement shapes wage law and the legislative agenda.",newUntil:"2026-05-01"},
 {id:"fraud",icon:"\uD83D\uDCB8",title:"Fraud, Waste & Abuse",stat:"$20B+ EDD",accent:C.coral,desc:"$20B in pandemic fraud. 280+ hospice licenses revoked. The real numbers and the inflated ones."},
 ]},
 {cat:"Health & Demographics",items:[
@@ -47,7 +50,7 @@ return(
 <div style={{textAlign:"center",marginBottom:40}}>
 <div style={{fontSize:12,color:C.amber,textTransform:"uppercase",letterSpacing:4,marginBottom:12,fontWeight:600}}>Interactive Policy Analysis — March 2026</div>
 <h1 style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:38,fontWeight:900,color:C.white,lineHeight:1.1,marginBottom:16}}>California:<br/>A State of Crisis?</h1>
-<p style={{fontSize:17,color:"#CBD5E1",maxWidth:620,margin:"0 auto",lineHeight:1.6}}>20 interactive dashboards examining California's most pressing policy failures — and the pattern that connects them all. Data-driven. Source-cited. Balanced where possible. Blunt where necessary.</p>
+<p style={{fontSize:17,color:"#CBD5E1",maxWidth:620,margin:"0 auto",lineHeight:1.6}}>{sections.reduce(function(n,s){return n+s.items.length;},0)} interactive dashboards examining California's most pressing policy failures — and the pattern that connects them all. Data-driven. Source-cited. Balanced where possible. Blunt where necessary.</p>
 </div>
 
 {sections.map(function(sec,si){return(
