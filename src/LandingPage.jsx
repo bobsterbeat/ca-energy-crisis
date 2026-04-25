@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const C={coral:"#FF6B6B",amber:"#FBBF24",green:"#34D399",teal:"#2DD4BF",blue:"#60A5FA",purple:"#A78BFA",orange:"#FB923C",cyan:"#22D3EE",white:"#F8FAFC",slate:"#94A3B8",bg:"#0F172A",card:"#1E293B",border:"#334155"};
 
 var sections=[
@@ -45,7 +47,8 @@ var sections=[
 ]}
 ];
 
-export default function Landing({onNavigate}){
+export default function Landing(){
+const navigate=useNavigate();
 return(
 <div style={{maxWidth:900,margin:"0 auto",padding:"40px 24px"}}>
 <div style={{textAlign:"center",marginBottom:40}}>
@@ -59,7 +62,7 @@ return(
 <h2 style={{fontSize:14,color:C.amber,textTransform:"uppercase",letterSpacing:3,marginBottom:14,fontWeight:600,paddingLeft:4}}>{sec.cat}</h2>
 <div style={{display:"flex",flexWrap:"wrap",gap:14}}>
 {sec.items.map(function(s){return(
-<div key={s.id} onClick={function(){onNavigate(s.id);}} style={{flex:"1 1 200px",background:C.card,border:"1px solid "+C.border,borderRadius:10,padding:"18px 16px",cursor:"pointer",borderTop:"3px solid "+s.accent,transition:"transform 0.15s",position:"relative"}}>
+<div key={s.id} onClick={function(){navigate("/"+s.id);}} style={{flex:"1 1 200px",background:C.card,border:"1px solid "+C.border,borderRadius:10,padding:"18px 16px",cursor:"pointer",borderTop:"3px solid "+s.accent,transition:"transform 0.15s",position:"relative"}}>
 {s.newUntil&&new Date()<new Date(s.newUntil)&&(<div style={{position:"absolute",top:-8,right:-8,background:C.green,color:"#0F172A",fontSize:10,fontWeight:800,letterSpacing:1,padding:"3px 8px",borderRadius:4,textTransform:"uppercase",boxShadow:"0 2px 6px rgba(0,0,0,0.4)"}}>NEW</div>)}
 <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8}}>
 <div style={{fontSize:28}}>{s.icon}</div>
