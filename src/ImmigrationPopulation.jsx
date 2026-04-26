@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList, ReferenceLine } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList, ReferenceLine, LineChart, Line, PieChart, Pie } from "recharts";
 const C={coral:"#FF6B6B",amber:"#FBBF24",green:"#34D399",teal:"#2DD4BF",blue:"#60A5FA",purple:"#A78BFA",orange:"#FB923C",cyan:"#22D3EE",white:"#F8FAFC",slate:"#94A3B8",bg:"#0F172A",card:"#1E293B",border:"#334155"};
 const Section=({title,subtitle,children,accent=C.blue})=>(<div style={{marginBottom:44}}><h2 style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:24,fontWeight:700,color:C.white,marginBottom:4,borderLeft:"4px solid "+accent,paddingLeft:16}}>{title}</h2>{subtitle&&<p style={{fontSize:15,color:C.slate,marginTop:4,marginBottom:18,paddingLeft:20}}>{subtitle}</p>}{children}</div>);
 const Stat=({label,value,sub,color=C.blue})=>(<div style={{background:C.card,border:"1px solid "+C.border,borderRadius:8,padding:"14px 18px",flex:"1 1 140px",minWidth:140}}><div style={{fontSize:11,color:C.slate,textTransform:"uppercase",letterSpacing:1}}>{label}</div><div style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:28,fontWeight:700,color,marginTop:4}}>{value}</div>{sub&&<div style={{fontSize:12,color:C.slate,marginTop:2}}>{sub}</div>}</div>);
@@ -13,7 +13,11 @@ var migrationData=[{year:"2020-21",domestic:-261,international:86},{year:"2021-2
 var originData=[{country:"Mexico",pop:3950,fill:C.coral},{country:"Philippines",pop:856,fill:C.orange},{country:"China",pop:823,fill:C.amber},{country:"India",pop:626,fill:C.green},{country:"Vietnam",pop:514,fill:C.teal},{country:"El Salvador",pop:456,fill:C.blue}];
 var costData=[{item:"Medi-Cal",cost:8.4,fill:C.coral},{item:"K-12 Education",cost:14.5,fill:C.orange},{item:"Incarceration",cost:1.5,fill:C.amber},{item:"Tax Revenue",cost:-8.5,fill:C.green}];
 
-var tabs=[{id:"overview",label:"Overview"},{id:"migration",label:"Population Flow"},{id:"undoc",label:"Undocumented"},{id:"costs",label:"Cost vs. Revenue"},{id:"policy",label:"Policy & Conflict"},{id:"honest",label:"Honest Assessment"}];
+var h1bTimeline=[{year:"2014",approvals:316},{year:"2015",approvals:275},{year:"2016",approvals:345},{year:"2017",approvals:366},{year:"2018",approvals:335},{year:"2019",approvals:389},{year:"2020",approvals:426},{year:"2021",approvals:407},{year:"2022",approvals:442},{year:"2023",approvals:386},{year:"2024",approvals:399}];
+var h1bOrigin=[{country:"India",pct:72.3,color:C.coral},{country:"China",pct:11.7,color:C.amber},{country:"Philippines",pct:1.5,color:C.green},{country:"Canada",pct:1.0,color:C.teal},{country:"S. Korea",pct:1.0,color:C.blue},{country:"Taiwan",pct:0.7,color:C.purple},{country:"Other",pct:11.8,color:C.slate}];
+var h1bCAEmployers=[{employer:"Google",approvals:8400,fill:C.blue},{employer:"Apple",approvals:7500,fill:C.coral},{employer:"Meta",approvals:6200,fill:C.purple},{employer:"TCS",approvals:5100,fill:C.amber},{employer:"Infosys",approvals:4400,fill:C.orange},{employer:"Cisco",approvals:3800,fill:C.green},{employer:"Cognizant",approvals:3500,fill:C.teal},{employer:"Intel",approvals:3300,fill:C.cyan}];
+
+var tabs=[{id:"overview",label:"Overview"},{id:"migration",label:"Population Flow"},{id:"h1b",label:"H-1B Visas"},{id:"undoc",label:"Undocumented"},{id:"costs",label:"Cost vs. Revenue"},{id:"policy",label:"Policy & Conflict"},{id:"honest",label:"Honest Assessment"}];
 
 export default function ImmigrationPopulation(){
 var s=useState("overview"),tab=s[0],setTab=s[1];
@@ -76,6 +80,80 @@ return(<>
 <Section title="Political Representation" accent={C.purple}>
 <p style={{fontSize:15,color:"#CBD5E1",lineHeight:1.7,marginBottom:14}}>California lost a House seat for the first time in its history in the 2020 redistricting (53→52). Multiple forecasts project a loss of <strong>4 more seats</strong> after 2030 (down to 48). Texas is projected to gain 4 (to 42), potentially surpassing CA as the largest delegation by 2040. Every lost seat = one fewer electoral vote.</p>
 <Callout color={C.purple}>Ironically, Biden-era immigration temporarily propped up CA's Census count. But many immigrants subsequently moved to TX and FL. The largest single state-to-state flow (2022-24): <strong>171,000 people from California to Texas.</strong> So immigration buoys blue-state counts temporarily while accelerating red-state growth. <Src href="https://www.brennancenter.org/our-work/analysis-opinion/how-states-seats-us-house-could-change-after-next-census">Brennan Center</Src></Callout>
+</Section>
+</>)}
+
+{tab==="h1b"&&(<>
+<div style={{display:"flex",flexWrap:"wrap",gap:12,marginBottom:20}}>
+<Stat label="Annual Cap" value="85,000" sub="65K regular + 20K masters" color={C.blue}/>
+<Stat label="Lottery Odds" value="5.5:1" sub="2024 registrations vs slots" color={C.coral}/>
+<Stat label="CA Share" value="~26%" sub="Of all US H-1B approvals" color={C.amber}/>
+<Stat label="Active in CA" value="~165K" sub="Estimated H-1B workforce" color={C.purple}/>
+</div>
+
+<Section title="The Cap Hasn't Moved Since 2004" subtitle="Annual H-1B approvals (initial + extensions, thousands)" accent={C.blue}>
+<Chart height={300}>
+<LineChart data={h1bTimeline} margin={{left:0,right:30,top:20}}>
+<CartesianGrid strokeDasharray="3 3" stroke="#334155"/>
+<XAxis dataKey="year" tick={{fill:C.slate,fontSize:12}}/>
+<YAxis tick={{fill:C.slate,fontSize:11}} tickFormatter={function(v){return v+"K";}} domain={[0,500]}/>
+<Tooltip content={<Tip/>}/>
+<ReferenceLine y={85} stroke={C.coral} strokeDasharray="5 5" label={{value:"New-petition cap: 85K",fill:C.coral,fontSize:11,position:"insideTopRight"}}/>
+<Line type="monotone" dataKey="approvals" name="Total approvals" stroke={C.blue} strokeWidth={3} dot={{r:4}}/>
+</LineChart>
+</Chart>
+<Callout color={C.blue}>The 85,000 annual cap on <strong>new</strong> H-1Bs has not budged since 2004. But extensions and renewals are uncapped, so total approvals each year run 4-5× the cap. The 2024 lottery saw <strong>470,000 registrations for 85,000 slots</strong> (~5.5:1 odds). USCIS introduced a "beneficiary-centric" rule in 2025 to curb gaming. <Src href="https://www.uscis.gov/sites/default/files/document/data/h-1b-petitions-by-gender-country-of-birth-fy2023.pdf">USCIS H-1B FY2023 report</Src></Callout>
+</Section>
+
+<Section title="Where They Come From" subtitle="H-1B approvals by country of birth, FY 2023" accent={C.green}>
+<div style={{display:"flex",flexWrap:"wrap",gap:20,alignItems:"center"}}>
+<div style={{flex:"1 1 280px"}}>
+<Chart height={300}>
+<PieChart>
+<Pie data={h1bOrigin} dataKey="pct" nameKey="country" cx="50%" cy="50%" outerRadius={110} innerRadius={55} paddingAngle={2} label={function(p){return p.country+" "+p.pct+"%";}} labelLine={{stroke:C.slate}}>
+{h1bOrigin.map(function(d,i){return <Cell key={i} fill={d.color} stroke="#1E293B" strokeWidth={2}/>;})}
+</Pie>
+<Tooltip content={<Tip/>}/>
+</PieChart>
+</Chart>
+</div>
+<div style={{flex:"1 1 280px",background:C.card,border:"1px solid "+C.border,borderRadius:8,padding:18}}>
+<h3 style={{fontSize:16,color:C.green,marginBottom:10,fontFamily:"'Playfair Display',serif"}}>India's growing dominance</h3>
+<p style={{fontSize:14,color:"#CBD5E1",lineHeight:1.6,marginBottom:10}}>India's share has grown from <strong style={{color:C.white}}>~40% in 2003</strong> to <strong style={{color:C.white}}>72%+ today</strong>. Three drivers: (1) the rise of US STEM pipelines among Indian graduates, (2) Indian outsourcing firms (TCS, Infosys, Wipro, Cognizant) using H-1B for client-site placements, and (3) China's share holding flat as Chinese tech grew domestically.</p>
+<p style={{fontSize:14,color:"#CBD5E1",lineHeight:1.6}}>The <strong style={{color:C.coral}}>7% per-country green-card cap</strong> means Indian H-1B holders face a backlog of 50+ years for an EB-2/3. They renew H-1B repeatedly while waiting — many become "permanently temporary."</p>
+</div>
+</div>
+</Section>
+
+<Section title="California's Top H-1B Sponsors" subtitle="Approvals to CA-based employers, recent year" accent={C.amber}>
+<Chart height={320}>
+<BarChart data={h1bCAEmployers} margin={{left:10,right:30,top:20}} layout="vertical">
+<CartesianGrid strokeDasharray="3 3" stroke="#334155" horizontal={false}/>
+<XAxis type="number" tick={{fill:C.slate,fontSize:11}} tickFormatter={function(v){return v.toLocaleString();}}/>
+<YAxis type="category" dataKey="employer" tick={{fill:C.slate,fontSize:11}} width={90}/>
+<Tooltip content={<Tip/>}/>
+<Bar dataKey="approvals" name="Approvals" radius={[0,4,4,0]} barSize={22}>
+{h1bCAEmployers.map(function(d,i){return <Cell key={i} fill={d.fill}/>;})}
+<LabelList dataKey="approvals" position="right" fill={C.white} fontSize={11} formatter={function(v){return v.toLocaleString();}}/>
+</Bar>
+</BarChart>
+</Chart>
+<Callout color={C.amber}>CA receives <strong>~26-28%</strong> of all H-1B approvals nationally — roughly double Texas (#2) and triple New York (#3). Top sponsors split between <strong>Big Tech direct hires</strong> (Apple, Google, Meta, Cisco, Intel) and <strong>Indian outsourcing bodyshops</strong> (TCS, Infosys, Cognizant) that place workers at client sites. <Src href="https://www.uscis.gov/h-1b-data-hub">USCIS H-1B Employer Data Hub</Src></Callout>
+</Section>
+
+<Section title="Why It Matters" accent={C.purple}>
+<Cards items={[
+{title:"The talent funnel",desc:"H-1B → green card → citizen is the primary path for skilled tech immigration. CA's tech industry was built on it; ~25% of Bay Area engineers hold H-1B at any given time.",color:C.green,topBorder:true},
+{title:"The wage debate",desc:"Outsourcing-firm H-1Bs are filed at the lowest of four DOL wage tiers (Level I, ~$85K). Big-tech H-1Bs file at Levels III-IV ($180K+). The 'displaces US workers' argument is heavily about Level I.",color:C.coral,topBorder:true},
+{title:"The 'durable temporary' problem",desc:"H-1Bs are 'temporary' but green-card backlogs trap Indians for decades. Job changes restart paperwork. US-born children age out of dependent status at 21, often leading to self-deportation of young adults.",color:C.orange,topBorder:true},
+{title:"The cap is stuck",desc:"85K since 2004 while the US labor market grew 25%+ and the global tech industry doubled. Reform bills proposing 195K-300K caps (Issa, Lofgren) consistently fail to clear. Both parties officially favor expansion. None passes.",color:C.purple,topBorder:true},
+]}/>
+</Section>
+
+<Section title="Sources" accent={C.slate}>
+<p style={{fontSize:13,color:"#CBD5E1",lineHeight:1.7}}>
+<Src href="https://www.uscis.gov/h-1b-data-hub">USCIS H-1B Employer Data Hub</Src> · <Src href="https://www.uscis.gov/working-in-the-united-states/h-1b-specialty-occupations">USCIS H-1B program data</Src> · <Src href="https://www.dhs.gov/ohss/topics/immigration/yearbook">DHS Yearbook of Immigration Statistics</Src> · <Src href="https://www.dol.gov/agencies/eta/foreign-labor/performance">DOL Foreign Labor Certification</Src>
+</p>
 </Section>
 </>)}
 
