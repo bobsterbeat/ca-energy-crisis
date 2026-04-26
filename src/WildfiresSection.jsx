@@ -353,7 +353,7 @@ export default function WildfiresSection() {
                 paddingAngle={2}
                 label={({ cause, value }) => `${cause}: ${value}%`}
                 labelLine={{ stroke: "#475569" }}
-                style={{ fontSize: 11, fill: "#CBD5E1" }}
+                style={{ fontSize: 11 }}
               >
                 {causeData.map((d, i) => (
                   <Cell key={i} fill={d.color} stroke="#1E293B" strokeWidth={2} />
