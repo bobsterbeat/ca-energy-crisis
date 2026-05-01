@@ -12,7 +12,8 @@ import CostOfLiving from "./CostOfLiving";
 import Education from "./Education";
 import Business from "./Business";
 import Crime from "./Crime";
-import LandingPage, { CRISIS_COUNT } from "./LandingPage";
+import LandingPage from "./LandingPage";
+import { routes, ORIGIN, metaByPath } from "./routes";
 import Infrastructure from "./Infrastructure";
 import CEQA from "./CEQA";
 import Conclusions from "./Conclusions";
@@ -64,74 +65,82 @@ const elecTabs=[{id:"rates",label:"Electricity Rates"},{id:"mix",label:"Generati
 
 const ElecPage=()=>{const[tab,setTab]=useState("rates");return(<><TabBar tabs={elecTabs} active={tab} onChange={setTab} accent={C.amber}/><div style={{maxWidth:900,margin:"0 auto",padding:"26px 24px"}}>{tab==="rates"&&(<><Stats items={[{label:"CA Residential",value:prices.electricity.ca.toFixed(1)+"¢",sub:"Per kWh, "+prices.electricity.asOf,color:C.coral},{label:"US Average",value:prices.electricity.us.toFixed(1)+"¢",sub:"Per kWh",color:C.blue},{label:"CA Premium",value:"+"+Math.round((prices.electricity.ca/prices.electricity.us-1)*100)+"%",sub:"Above national avg",color:C.amber},{label:"Monthly Bill",value:"$170",sub:"Using only 491 kWh",color:C.orange}]}/><Section title="Residential Electricity Rates" subtitle="Cents per kWh, March 2026" accent={C.amber}><Chart height={320}><BarChart data={elecRates} margin={{left:0,right:25,top:20}}><CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false}/><XAxis dataKey="state" tick={{fill:C.slate,fontSize:11}}/><YAxis tick={{fill:C.slate,fontSize:11}} tickFormatter={v=>`${v}¢`} domain={[0,45]}/><Tooltip content={<Tip/>}/><ReferenceLine y={18.05} stroke={C.blue} strokeDasharray="5 5"/><Bar dataKey="rate" name="¢/kWh" radius={[4,4,0,0]} barSize={40}>{elecRates.map((d,i)=><Cell key={i} fill={d.fill}/>)}<LabelList dataKey="rate" position="top" fill={C.white} fontSize={11} formatter={v=>`${v}¢`}/></Bar></BarChart></Chart></Section><Section title="Use Less, Pay More" subtitle="CA uses ~45% less electricity but pays higher bills" accent={C.amber}><div style={{background:C.card,borderRadius:8,padding:20,border:`1px solid ${C.border}`}}><div style={{display:"flex",flexWrap:"wrap",gap:16}}>{billComp.map((b,i)=>(<div key={i} style={{flex:"1 1 180px",background:C.bg,borderRadius:8,padding:16,textAlign:"center",borderTop:`3px solid ${[C.coral,C.blue,C.green,C.teal][i]}`}}><div style={{fontSize:15,fontWeight:700,color:C.white,marginBottom:6}}>{b.state}</div><div style={{fontSize:28,fontWeight:700,color:C.amber,fontFamily:"'Playfair Display',serif"}}>${b.bill}</div><div style={{fontSize:12,color:C.slate}}>Monthly bill</div><div style={{fontSize:18,fontWeight:600,color:C.white,marginTop:6}}>{b.kwh} kWh</div><div style={{fontSize:12,color:C.slate}}>Usage</div><div style={{fontSize:15,fontWeight:600,color:i===0?C.coral:C.green,marginTop:6}}>{b.rate}¢/kWh</div></div>))}</div><Callout><strong>Texas uses 2.2x more electricity</strong> and pays the same bill. The difference is pure rate premium.</Callout></div></Section><Section title="Rate Trajectory" subtitle="Residential ¢/kWh, 2019–2026" accent={C.amber}><Chart height={280}><LineChart data={rateHistory} margin={{left:0,right:20,top:10}}><CartesianGrid strokeDasharray="3 3" stroke="#334155"/><XAxis dataKey="year" tick={{fill:C.slate,fontSize:12}}/><YAxis tick={{fill:C.slate,fontSize:11}} tickFormatter={v=>`${v}¢`} domain={[8,38]}/><Tooltip content={<Tip/>}/><Line type="monotone" dataKey="ca" name="California" stroke={C.coral} strokeWidth={3} dot={{r:4}}/><Line type="monotone" dataKey="us" name="US Average" stroke={C.blue} strokeWidth={2} strokeDasharray="5 5" dot={{r:3}}/><Line type="monotone" dataKey="tx" name="Texas" stroke={C.green} strokeWidth={2} dot={{r:3}}/><Legend wrapperStyle={{fontSize:12}}/></LineChart></Chart><Callout color={C.coral}>CA rates grew <strong>76% since 2019</strong> — nearly double the national average and triple Texas.</Callout></Section></>)}{tab==="mix"&&(<><Stats items={[{label:"Low-Carbon",value:"55%",sub:"Of generation",color:C.green},{label:"Solar",value:"29.4%",sub:"Largest source",color:C.amber},{label:"Gas",value:"25.8%",sub:"Still essential",color:C.orange},{label:"Imports",value:"19%",sub:"From other states",color:C.slate}]}/><Section title="Generation Mix" subtitle="California electricity by source" accent={C.amber}><div style={{display:"flex",flexWrap:"wrap",gap:20,alignItems:"center"}}><div style={{flex:"1 1 300px"}}><Chart height={300}><PieChart><Pie data={genMix} dataKey="pct" nameKey="source" cx="50%" cy="50%" outerRadius={110} innerRadius={55} paddingAngle={2} label={({source,pct})=>`${source} ${pct}%`} labelLine={{stroke:C.slate}}>{genMix.map((d,i)=><Cell key={i} fill={d.color}/>)}</Pie><Tooltip/></PieChart></Chart></div><div style={{flex:"1 1 280px",background:C.card,border:`1px solid ${C.border}`,borderRadius:8,padding:18}}><h3 style={{fontSize:16,color:C.amber,marginBottom:10,fontFamily:"'Playfair Display',serif"}}>Credit Where It's Due</h3><p style={{fontSize:15,color:"#CBD5E1",lineHeight:1.6,marginBottom:10}}>Solar nearly <strong style={{color:C.green}}>doubled 2020–2025</strong>. Real progress.</p><p style={{fontSize:15,color:"#CBD5E1",lineHeight:1.6,marginBottom:10}}>But <strong style={{color:C.coral}}>19% is imported</strong> — much from fossil sources CA regulates against.</p><p style={{fontSize:15,color:"#CBD5E1",lineHeight:1.6}}>Gas still provides <strong style={{color:C.orange}}>~26%</strong> — indispensable when the sun sets.</p></div></div></Section><Section title="Solar Rising, Gas Falling" subtitle="Jan–Aug generation (billion kWh)" accent={C.amber}><Chart height={300}><BarChart data={solarGrowth} margin={{left:0,right:20,top:10}}><CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false}/><XAxis dataKey="year" tick={{fill:C.slate,fontSize:12}}/><YAxis tick={{fill:C.slate,fontSize:11}}/><Tooltip content={<Tip/>}/><Bar dataKey="solar" name="Solar" fill={C.amber} radius={[4,4,0,0]} barSize={20}/><Bar dataKey="gas" name="Gas" fill={C.orange} radius={[4,4,0,0]} barSize={20}/><Bar dataKey="battery" name="Battery" fill={C.green} radius={[4,4,0,0]} barSize={20}/><Legend wrapperStyle={{fontSize:12}}/></BarChart></Chart><Callout color={C.green}>Battery storage grew <strong>30x from 2020–2025</strong>. Essential but expensive.</Callout></Section></>)}{tab==="duck"&&(<><Section title="The Duck Curve" subtitle="Typical spring day generation (GW)" accent={C.amber}><Chart height={350}><AreaChart data={duckCurve} margin={{left:0,right:20,top:10}}><CartesianGrid strokeDasharray="3 3" stroke="#334155"/><XAxis dataKey="hour" tick={{fill:C.slate,fontSize:11}}/><YAxis tick={{fill:C.slate,fontSize:11}}/><Tooltip content={<Tip/>}/><Area type="monotone" dataKey="solar" stackId="1" fill={C.amber} stroke={C.amber} fillOpacity={0.7} name="Solar"/><Area type="monotone" dataKey="wind" stackId="1" fill={C.cyan} stroke={C.cyan} fillOpacity={0.5} name="Wind"/><Area type="monotone" dataKey="nuclear" stackId="1" fill={C.purple} stroke={C.purple} fillOpacity={0.6} name="Nuclear"/><Area type="monotone" dataKey="hydro" stackId="1" fill={C.blue} stroke={C.blue} fillOpacity={0.5} name="Hydro"/><Area type="monotone" dataKey="gas" stackId="1" fill={C.orange} stroke={C.orange} fillOpacity={0.6} name="Gas"/><Line type="monotone" dataKey="demand" stroke={C.white} strokeWidth={2} strokeDasharray="5 5" dot={false} name="Demand"/><Legend wrapperStyle={{fontSize:11}}/></AreaChart></Chart></Section><Cards items={[{title:"Solar Flood",sub:"Midday",desc:"More than needed. Excess curtailed or stored. Prices sometimes go negative.",color:C.amber,icon:"\u2600\uFE0F",topBorder:true},{title:"The Ramp",sub:"Evening",desc:"Solar drops to zero in ~2hrs. Gas ramps 12+ GW — steepest climb on any US grid.",color:C.orange,icon:"\uD83C\uDF19",topBorder:true},{title:"Gas Dependent",sub:"Night",desc:"No solar, limited wind. Gas provides backbone. Batteries help 2-4hrs max.",color:C.coral,icon:"\uD83D\uDD25",topBorder:true},{title:"Vulnerability",sub:"Cloudy/Smoky",desc:"Wildfire smoke cuts solar 50-80%. Gas and imports surge — so do prices.",color:C.purple,icon:"\uD83C\uDF2B\uFE0F",topBorder:true}]}/><Callout color={C.orange}><strong>The irony:</strong> Most solar in the nation but can't use it when people need power most. Gas plants idle all day, sprint 4-5 hours, and those costs hit every kWh.</Callout></>)}{tab==="nuclear"&&(<><Stats items={[{label:"Closed",value:"4",sub:"Since 1976",color:C.coral},{label:"Remaining",value:"1",sub:"Diablo Canyon",color:C.purple},{label:"Output",value:"18 TWh",sub:"8.6% of CA gen",color:C.amber},{label:"Savings",value:"$21B",sub:"If kept to 2045",color:C.green}]}/><Section title="California's Nuclear History" subtitle="Every closure increased fossil dependence" accent={C.purple}><div style={{background:C.card,borderRadius:8,border:`1px solid ${C.border}`,overflow:"hidden"}}>{[{name:"Humboldt Bay",status:"Closed 1976",cap:"63 MW",reason:"Seismic",active:false},{name:"Rancho Seco",status:"Closed 1989",cap:"913 MW",reason:"Voter referendum",active:false},{name:"San Onofre 1",status:"Closed 1992",cap:"436 MW",reason:"Economic/age",active:false},{name:"San Onofre 2&3",status:"Closed 2013",cap:"2,150 MW",reason:"Steam generator failure",active:false},{name:"Diablo Canyon",status:"Operating → 2030+",cap:"2,240 MW",reason:"Seeking 20-yr NRC renewal to 2045",active:true}].map((n,i)=>(<div key={i} style={{display:"flex",alignItems:"center",gap:14,padding:"14px 20px",borderBottom:i<4?`1px solid ${C.border}`:"none",background:n.active?`${C.purple}15`:"transparent"}}><div style={{width:10,height:10,borderRadius:"50%",background:n.active?C.green:C.coral,flexShrink:0}}/><div style={{flex:1}}><div style={{display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:8}}><span style={{fontWeight:700,fontSize:15,color:C.white}}>{n.name}</span><span style={{fontSize:13,color:n.active?C.green:C.coral,fontWeight:600}}>{n.status}</span></div><div style={{display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:8,marginTop:2}}><span style={{fontSize:13,color:C.slate}}>{n.cap}</span><span style={{fontSize:13,color:C.slate,fontStyle:"italic"}}>{n.reason}</span></div></div></div>))}</div></Section><Section title="The Diablo Canyon Paradox" accent={C.purple}><div style={{display:"flex",flexWrap:"wrap",gap:14,marginBottom:16}}>{[{label:"2016–18",desc:"CA agrees to close by 2025.",color:C.coral,icon:"❌"},{label:"2021",desc:"MIT/Stanford: saves $21B, cuts emissions 11%/yr.",color:C.amber,icon:"\uD83D\uDCCA"},{label:"2022",desc:"Newsom reverses. SB 846 extends to 2030.",color:C.green,icon:"↩️"},{label:"2026",desc:"PG&E seeks 20-yr license to 2045. Legislature must act now.",color:C.purple,icon:"⚡"}].map((s,i)=>(<div key={i} style={{flex:"1 1 180px",background:C.bg,borderRadius:8,padding:14,textAlign:"center",border:`1px solid ${C.border}`}}><div style={{fontSize:28,marginBottom:6}}>{s.icon}</div><div style={{fontSize:13,color:s.color,fontWeight:700,marginBottom:4}}>{s.label}</div><p style={{fontSize:13,color:"#CBD5E1",lineHeight:1.4}}>{s.desc}</p></div>))}</div><Callout color={C.purple}>CA spent years trying to close its largest carbon-free source (23% of clean power), reversed when the grid couldn't cope, and now spends billions to keep open a plant it agreed to close. Base cost: <strong>$21/MWh</strong>. With political fees: $75–111/MWh.</Callout></Section></>)}{tab==="costs"&&(<><Section title="What Drives CA Electricity Costs?" subtitle="Major cost categories (estimated annual)" accent={C.amber}><div style={{background:C.card,borderRadius:8,padding:20,border:`1px solid ${C.border}`}}>{costDrivers.map((d,i)=>(<div key={i} style={{marginBottom:12}}><div style={{display:"flex",justifyContent:"space-between",fontSize:14,marginBottom:3}}><span style={{color:C.white}}>{d.driver}</span><span style={{color:d.color,fontWeight:700}}>{d.amount}</span></div><div style={{background:C.bg,borderRadius:4,height:18,overflow:"hidden"}}><div style={{width:`${d.pct*3.3}%`,height:"100%",background:`${d.color}CC`,borderRadius:4,display:"flex",alignItems:"center",paddingLeft:6}}><span style={{fontSize:10,color:C.white,fontWeight:600}}>{d.pct}%</span></div></div></div>))}<Callout color={C.coral}><strong>Wildfire costs dominate.</strong> After Paradise (2018), PG&E went bankrupt. Billions in undergrounding and liability — all passed to ratepayers. The largest driver has nothing to do with energy generation.</Callout></div></Section><Cards items={[{title:"Solar Subsidy Shift",desc:"Legacy NEM let solar homeowners export at retail rates. Non-solar ratepayers subsidized the wealthy.",color:C.amber,border:true},{title:"Income-Based Charges",desc:"New CPUC fixed charges $6–$128 based on income. More complexity on confused bills.",color:C.purple,border:true},{title:"EV Grid Costs",desc:"Transformer upgrades for EV charging paid by all — including those who can't afford EVs.",color:C.blue,border:true},{title:"Central Valley",desc:"Extreme heat, long commutes, no transit, half the coastal income. Hit hardest by everything.",color:C.coral,border:true}]}/></>)}</div></>);};
 
-const SECTIONS_WITH_OWN_HERO=["fastfood","roadcharge","healthcarewage","stategov","unions","gerrymandering","wildfires"];
-
-const PAGE_META={
-  home:{title:"California: A State of Crisis? — Policy Analysis Dashboards",description:"Interactive policy analysis of California's gasoline prices, electricity rates, housing, homelessness, water, high-speed rail, insurance, education, crime, infrastructure, CEQA, fast-food wages, road charges, healthcare wages, unions, immigration, gerrymandering, and more. Data-driven. Source-cited."},
-  gas:{title:"California's Gasoline Crisis | CA Policy",heroTitle:"California's Gasoline Crisis",description:"Refinery closures, boutique fuel mandates, and geographic isolation created the most expensive fuel market in America."},
-  elec:{title:"California's Electricity Crisis | CA Policy",heroTitle:"California's Electricity Crisis",description:"Double the price, half the usage. Mandates, wildfires, and nuclear politics drive the priciest electricity on the mainland."},
-  water:{title:"California's Water Crisis | CA Policy",heroTitle:"California's Water Crisis",description:"80% of water to agriculture, restrictions on residents, and proven solutions rejected."},
-  rail:{title:"High-Speed Rail: $126B and Counting | CA Policy",heroTitle:"High-Speed Rail: $126B and Counting",description:"18 years. $18 billion spent. Zero passengers. The most expensive infrastructure failure in American history."},
-  housing:{title:"Housing: The $905K Dream | CA Policy",heroTitle:"Housing: The $905K Dream",description:"82% of households priced out. 3 million unit shortage. 25 years to save for a down payment."},
-  homeless:{title:"Homelessness: 183,000 and Counting | CA Policy",heroTitle:"Homelessness: 183,000 and Counting",description:"$24 billion spent. Numbers went up. 7 people die daily on LA County streets alone."},
-  insurance:{title:"Insurance: The Market That Broke | CA Policy",heroTitle:"Insurance: The Market That Broke",description:"7 of 12 top insurers leaving. $51.7B in fire damage. 30 years of suppressed pricing coming due."},
-  col:{title:"Cost of Living: The California Tax | CA Policy",heroTitle:"Cost of Living: The California Tax",description:"The highest taxes, gas, groceries, and utilities in the continental U.S. — and it's accelerating."},
-  edu:{title:"Education: Spending More, Getting Less | CA Policy",heroTitle:"Education: Spending More, Getting Less",description:"$128B budget. 46th in reading. 45th in math. The most expensive underperformance in the nation."},
-  biz:{title:"Business Climate: The Regulation State | CA Policy",heroTitle:"Business Climate: The Regulation State",description:"395 new regulations per year. 18,000+ companies left since 2018. The state that taxes success and subsidizes failure."},
-  crime:{title:"Crime: The Accountability Crisis | CA Policy",heroTitle:"Crime: The Accountability Crisis",description:"Prop 47 raised the theft threshold. Smash-and-grabs tripled. DA recall movements in 5 counties."},
-  infra:{title:"Infrastructure: Grade C- | CA Policy",heroTitle:"Infrastructure: Grade C-",description:"$216B funding gap. 30% of roads poor. 65% of bridges past design life. The 5th largest economy on a D+ foundation."},
-  ceqa:{title:"CEQA: The Law That Blocks Everything | CA Policy",heroTitle:"CEQA: The Law That Blocks Everything",description:"One 1970 law. 55 years unreformed. The hidden engine behind every crisis on this site."},
-  conclusion:{title:"Conclusions: The Pattern & The Path Forward | CA Policy",heroTitle:"Conclusions: The Pattern & The Path Forward",description:CRISIS_COUNT+" crises. One pattern. What caused them, who benefits, and what would fix them."},
-  politics:{title:"Political Structure: Why Nothing Changes | CA Policy",heroTitle:"Political Structure: Why Nothing Changes",description:"One-party supermajority. Union-funded campaigns. Gerrymandered maps. And 13 years without accountability."},
-  exodus:{title:"The California Exodus | CA Policy",heroTitle:"The California Exodus",description:"1.7 million residents gone since 2020. Companies, tax revenue, and talent following them out."},
-  fraud:{title:"Fraud, Waste & Abuse | CA Policy",heroTitle:"Fraud, Waste & Abuse",description:"$20B in EDD fraud. 280+ hospice licenses revoked. $146B in estimated Medi-Cal losses. The real numbers and the inflated ones."},
-  healthcare:{title:"Healthcare Financing: How It Actually Works | CA Policy",heroTitle:"Healthcare Financing: How It Actually Works",description:"Medicare, Medi-Cal, employer insurance, Covered CA — how the patchwork pays for care and why the cross-subsidy is breaking."},
-  immigration:{title:"Immigration & Population | CA Policy",heroTitle:"Immigration & Population",description:"10.9M immigrants, 1.46M domestic out-migration, and a $17-22B fiscal question California has never formally studied."},
-  globe:{title:"Supply Routes — 12,300 nm Journey of CA Gasoline | CA Policy",description:"Interactive 3D globe showing the absurd journey of California's gasoline imports."},
-  fastfood:{title:"The $20 Fast-Food Wage (AB 1228) | CA Policy",description:"AB 1228 at two years. Six studies. Two opposing narratives. The defensible read on California's sectoral fast-food minimum wage."},
-  roadcharge:{title:"California Road Charge & Mileage Fee | CA Policy",description:"California's gas tax is dying. The mileage-fee replacement: what's actually proposed, and why most coverage is wrong."},
-  healthcarewage:{title:"SB 525 Healthcare Minimum Wage | CA Policy",description:"California's $25/hr healthcare minimum wage by tier. Four schedules with different timelines."},
-  stategov:{title:"How California Actually Governs | CA Policy",description:"Supermajority rules, the proposition system, money in politics, and the legislative calendar."},
-  unions:{title:"California Labor Unions & Political Power | CA Policy",description:"How California's 2-million-member labor movement shapes wage law and the legislative agenda."},
-  gerrymandering:{title:"Gerrymandering 2026: Mid-Decade Redistricting | CA Policy",description:"The largest mid-decade redistricting cycle in 60 years. Texas, California Prop 50, and four other states."},
-  wildfires:{title:"California Wildfires & Forestry | CA Policy",description:"PG&E liability, federal forest mismanagement, and the 2025 LA fires that reshaped the state."},
-};
-
-const pageFromPath=(p)=>p==="/"?"home":p.slice(1).replace(/\/$/,"");
-
-function PageHeader({page}){
-  if(page==="home"||SECTIONS_WITH_OWN_HERO.includes(page))return null;
-  const meta=PAGE_META[page]||{};
-  const isGas=page==="gas";
+function PageHeader({route}){
+  if(!route||!route.heroTitle)return null;
+  const isGas=route.path==="/gas";
   return(
     <div style={{background:isGas?"linear-gradient(135deg,#7F1D1D 0%,#1E293B 60%)":"linear-gradient(135deg,#78350F 0%,#1E293B 60%)",padding:"28px 24px 22px",borderBottom:`2px solid ${isGas?C.coral:C.amber}`}}>
       <div style={{maxWidth:900,margin:"0 auto"}}>
         <div style={{fontSize:11,color:isGas?C.coral:C.amber,textTransform:"uppercase",letterSpacing:3,marginBottom:6,fontWeight:600}}>Policy Analysis — {new Date().toLocaleString("en-US",{month:"long",year:"numeric"})}</div>
-        <h1 style={{fontFamily:"'Playfair Display',serif",fontSize:30,fontWeight:900,color:C.white,lineHeight:1.1}}>{meta.heroTitle||"California Energy Crisis"}</h1>
-        <p style={{fontSize:15,color:"#CBD5E1",maxWidth:600,lineHeight:1.5,marginTop:6}}>{meta.description||"Policy analysis of California's self-inflicted crises."}</p>
+        <h1 style={{fontFamily:"'Playfair Display',serif",fontSize:30,fontWeight:900,color:C.white,lineHeight:1.1}}>{route.heroTitle}</h1>
+        <p style={{fontSize:15,color:"#CBD5E1",maxWidth:600,lineHeight:1.5,marginTop:6}}>{route.description}</p>
       </div>
     </div>
   );
 }
 
+const COMPONENTS={
+  "/":LandingPage,
+  "/gas":GasPage,
+  "/elec":ElecPage,
+  "/globe":Globe,
+  "/exodus":Exodus,
+  "/water":Water,
+  "/rail":Rail,
+  "/housing":Housing,
+  "/homeless":Homeless,
+  "/insurance":Insurance,
+  "/col":CostOfLiving,
+  "/edu":Education,
+  "/biz":Business,
+  "/crime":Crime,
+  "/infra":Infrastructure,
+  "/ceqa":CEQA,
+  "/conclusion":Conclusions,
+  "/politics":PoliticalStructure,
+  "/fraud":FraudWasteAbuse,
+  "/healthcare":HealthcareFinancing,
+  "/immigration":ImmigrationPopulation,
+  "/fastfood":FastFoodWageSection,
+  "/roadcharge":RoadChargeSection,
+  "/healthcarewage":HealthcareWageSection,
+  "/stategov":StateGovernmentSection,
+  "/unions":UnionsSection,
+  "/gerrymandering":GerrymanderingSection,
+  "/wildfires":WildfiresSection,
+};
+
+const setMeta=(selector,attr,value)=>{
+  const el=document.querySelector(selector);
+  if(el)el.setAttribute(attr,value);
+};
+
 export default function App(){
   const location=useLocation();
   const navigate=useNavigate();
-  const page=pageFromPath(location.pathname);
+  const route=metaByPath(location.pathname);
+  const isHome=location.pathname==="/";
 
   useEffect(()=>{
-    const meta=PAGE_META[page]||PAGE_META.home;
-    document.title=meta.title;
-    const descTag=document.querySelector('meta[name="description"]');
-    if(descTag)descTag.setAttribute("content",meta.description);
+    const r=metaByPath(location.pathname);
+    document.title=r.title;
+    const url=`${ORIGIN}${location.pathname==="/"?"/":location.pathname}`;
+    setMeta('meta[name="description"]','content',r.description);
+    setMeta('link[rel="canonical"]','href',url);
+    setMeta('meta[property="og:url"]','content',url);
+    setMeta('meta[property="og:title"]','content',r.title);
+    setMeta('meta[property="og:description"]','content',r.description);
+    setMeta('meta[property="og:type"]','content',r.ogType);
+    setMeta('meta[name="twitter:title"]','content',r.title);
+    setMeta('meta[name="twitter:description"]','content',r.description);
     if(typeof window!=="undefined"&&window.gtag){
       window.gtag("event","page_view",{
         page_path:location.pathname,
-        page_title:meta.title,
+        page_title:r.title,
         page_location:window.location.origin+location.pathname,
       });
     }
-  },[location.pathname,page]);
+  },[location.pathname]);
 
   return(
     <div style={{background:C.bg,color:C.white,minHeight:"100vh",fontFamily:"'Source Sans 3',sans-serif"}}>
@@ -140,39 +149,15 @@ export default function App(){
         <div style={{maxWidth:900,margin:"0 auto",display:"flex",alignItems:"center"}}>
           <button onClick={()=>navigate("/")} style={{background:"none",border:"none",color:C.amber,fontFamily:"'Playfair Display',serif",fontSize:18,fontWeight:900,padding:"14px 16px 14px 0",cursor:"pointer",marginRight:8}}>CA Policy</button>
           <div style={{width:1,height:20,background:C.border,marginRight:8}}/>
-          {page!=="home"&&<button onClick={()=>navigate("/")} style={{background:"none",border:"none",color:C.amber,fontSize:13,padding:"14px 12px",cursor:"pointer",fontFamily:"'Source Sans 3',sans-serif"}}>← All Sections</button>}
+          {!isHome&&<button onClick={()=>navigate("/")} style={{background:"none",border:"none",color:C.amber,fontSize:13,padding:"14px 12px",cursor:"pointer",fontFamily:"'Source Sans 3',sans-serif"}}>← All Sections</button>}
         </div>
       </nav>
-      <PageHeader page={page}/>
+      <PageHeader route={route}/>
       <Routes>
-        <Route path="/" element={<LandingPage/>}/>
-        <Route path="/gas" element={<GasPage/>}/>
-        <Route path="/elec" element={<ElecPage/>}/>
-        <Route path="/globe" element={<Globe/>}/>
-        <Route path="/exodus" element={<Exodus/>}/>
-        <Route path="/water" element={<Water/>}/>
-        <Route path="/rail" element={<Rail/>}/>
-        <Route path="/housing" element={<Housing/>}/>
-        <Route path="/homeless" element={<Homeless/>}/>
-        <Route path="/insurance" element={<Insurance/>}/>
-        <Route path="/col" element={<CostOfLiving/>}/>
-        <Route path="/edu" element={<Education/>}/>
-        <Route path="/biz" element={<Business/>}/>
-        <Route path="/crime" element={<Crime/>}/>
-        <Route path="/infra" element={<Infrastructure/>}/>
-        <Route path="/ceqa" element={<CEQA/>}/>
-        <Route path="/conclusion" element={<Conclusions/>}/>
-        <Route path="/politics" element={<PoliticalStructure/>}/>
-        <Route path="/fraud" element={<FraudWasteAbuse/>}/>
-        <Route path="/healthcare" element={<HealthcareFinancing/>}/>
-        <Route path="/immigration" element={<ImmigrationPopulation/>}/>
-        <Route path="/fastfood" element={<FastFoodWageSection/>}/>
-        <Route path="/roadcharge" element={<RoadChargeSection/>}/>
-        <Route path="/healthcarewage" element={<HealthcareWageSection/>}/>
-        <Route path="/stategov" element={<StateGovernmentSection/>}/>
-        <Route path="/unions" element={<UnionsSection/>}/>
-        <Route path="/gerrymandering" element={<GerrymanderingSection/>}/>
-        <Route path="/wildfires" element={<WildfiresSection/>}/>
+        {routes.map(r=>{
+          const Component=COMPONENTS[r.path];
+          return Component?<Route key={r.path} path={r.path} element={<Component/>}/>:null;
+        })}
         <Route path="*" element={<Navigate to="/" replace/>}/>
       </Routes>
       <div style={{maxWidth:900,margin:"0 auto",padding:"20px 24px 40px"}}>

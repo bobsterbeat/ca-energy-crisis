@@ -12,7 +12,12 @@ const R=[
 const L=[{name:"Los Angeles",lat:34,lon:-118,color:0xFF6B6B,s:0.022},{name:"Houston",lat:29.7,lon:-95.3,color:0x34D399,s:0.018},{name:"Freeport, Bahamas",lat:26.5,lon:-78.7,color:0xFBBF24,s:0.015},{name:"Strait of Hormuz",lat:26.5,lon:56,color:0xFB923C,s:0.018},{name:"Gujarat, India",lat:22.3,lon:70,color:0x2DD4BF,s:0.018},{name:"Yeosu, S. Korea",lat:34.7,lon:127.7,color:0x22D3EE,s:0.018},{name:"Panama Canal",lat:9,lon:-79.5,color:0xFBBF24,s:0.012},{name:"Malacca Strait",lat:2,lon:103,color:0xFB923C,s:0.012}];
 export default function Globe(){
 const ref=useRef(null);const[active,setActive]=useState(null);const arcsRef=useRef([]);const cleanupRef=useRef({});
-useEffect(()=>{const el=ref.current;if(!el)return;while(el.firstChild)el.removeChild(el.firstChild);
+useEffect(()=>{
+// Skip three.js/WebGL during prerender so the captured HTML stays lightweight.
+// The surrounding text content (headings, route descriptions, totals) renders
+// either way — the canvas is purely visual and useless for SEO.
+if(typeof window!=="undefined"&&window.__PRERENDER__)return;
+const el=ref.current;if(!el)return;while(el.firstChild)el.removeChild(el.firstChild);
 const w=el.clientWidth,h=Math.min(w*0.75,520);
 const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(45,w/h,0.1,100);cam.position.set(0,0.3,2.6);
 const ren=new THREE.WebGLRenderer({antialias:true,alpha:true});ren.setSize(w,h);ren.setPixelRatio(Math.min(window.devicePixelRatio,2));el.appendChild(ren.domElement);

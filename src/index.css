@@ -1,13 +1,2 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: #0F172A; }
-
-/* SEO content visible to crawlers, hidden off-screen from sighted users.
-   Honest mirror of React content; do not change to display:none. */
-.seo-only {
-  position: absolute;
-  left: -9999px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}

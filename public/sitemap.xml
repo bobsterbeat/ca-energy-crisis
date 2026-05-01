@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ca-policy.com/</loc><lastmod>2026-05-01</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://ca-policy.com/about</loc><lastmod>2026-05-01</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
   <url><loc>https://ca-policy.com/gas</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://ca-policy.com/elec</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://ca-policy.com/water</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ca-policy.com/globe</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ca-policy.com/col</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://ca-policy.com/housing</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://ca-policy.com/insurance</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ca-policy.com/biz</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ca-policy.com/fastfood</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://ca-policy.com/healthcarewage</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://ca-policy.com/homeless</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ca-policy.com/exodus</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ca-policy.com/rail</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ca-policy.com/housing</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://ca-policy.com/homeless</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ca-policy.com/insurance</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ca-policy.com/col</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://ca-policy.com/edu</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ca-policy.com/biz</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ca-policy.com/crime</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ca-policy.com/infra</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ca-policy.com/roadcharge</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://ca-policy.com/ceqa</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ca-policy.com/conclusion</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ca-policy.com/politics</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ca-policy.com/stategov</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ca-policy.com/fraud</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ca-policy.com/healthcare</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ca-policy.com/immigration</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ca-policy.com/fastfood</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://ca-policy.com/roadcharge</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://ca-policy.com/healthcarewage</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://ca-policy.com/stategov</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ca-policy.com/unions</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ca-policy.com/gerrymandering</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://ca-policy.com/wildfires</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://ca-policy.com/healthcare</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ca-policy.com/immigration</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ca-policy.com/exodus</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ca-policy.com/conclusion</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ca-policy.com/about</loc><lastmod>2026-05-01</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
 </urlset>
