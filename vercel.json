@@ -1,4 +1,26 @@
 {
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "ca-energy-crisis.vercel.app" }],
+      "destination": "https://ca-policy.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.ca-policy.com" }],
+      "destination": "https://ca-policy.com/$1",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "index, follow" }
+      ]
+    }
+  ],
   "rewrites": [
     { "source": "/((?!api|.*\\..*).*)", "destination": "/" }
   ]
