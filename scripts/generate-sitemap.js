@@ -13,6 +13,11 @@ const today = new Date().toISOString().slice(0, 10);
 
 const homepage = { path: "/", changefreq: "weekly", priority: "1.0" };
 
+// Static informational pages.
+const staticPages = [
+  ["about", "yearly", "0.5"],
+];
+
 // Section anchors. Slug matches the React app's setPage() ids and the
 // SEO-only block links in index.html. Order roughly mirrors site flow.
 const sections = [
@@ -50,6 +55,7 @@ const entry = (loc, lastmod, changefreq, priority) =>
 
 const urls = [
   entry(`${ORIGIN}/`, today, homepage.changefreq, homepage.priority),
+  ...staticPages.map(([slug, cf, pr]) => entry(`${ORIGIN}/${slug}`, today, cf, pr)),
   ...sections.map(([slug, cf, pr]) => entry(`${ORIGIN}/${slug}`, today, cf, pr)),
 ].join("\n");
 
@@ -61,4 +67,4 @@ ${urls}
 
 const outPath = resolve(__dirname, "..", "public", "sitemap.xml");
 writeFileSync(outPath, xml);
-console.log(`✓ sitemap.xml regenerated (${sections.length + 1} URLs, lastmod ${today})`);
+console.log(`✓ sitemap.xml regenerated (${1 + staticPages.length + sections.length} URLs, lastmod ${today})`);

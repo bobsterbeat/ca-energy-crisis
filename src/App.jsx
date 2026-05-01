@@ -179,6 +179,9 @@ export default function App(){
         <div style={{borderTop:`1px solid ${C.border}`,paddingTop:18,fontSize:12,color:C.slate,lineHeight:1.6}}>
           <strong style={{color:C.white}}>Sources:</strong> EIA, CAISO, CA Energy Commission, CPUC, CA Legislative Analyst, NRC, AAA, GasBuddy, Tax Foundation, MIT/Stanford, Kpler, Bloomberg, Reuters, CalMatters, UC Davis. March 2026.
         </div>
+        <div style={{marginTop:14,fontSize:12,color:C.slate}}>
+          &copy; 2026 CA Policy &middot; <a href="/about" style={{color:C.amber,textDecoration:"none"}}>About</a>
+        </div>
       </div>
     </div>
   );
