@@ -22,8 +22,28 @@ import { readFile, stat } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createServer } from "node:http";
-import puppeteer from "puppeteer";
 import { routes, ORIGIN } from "../src/routes.js";
+
+// Vercel build containers don't include libnspr4 / libnss3 / friends, so the
+// Chromium that `puppeteer` bundles can't launch there. On Vercel we use
+// `@sparticuz/chromium` (a Linux-serverless-tuned build with those libs
+// statically linked) via `puppeteer-core`. Local dev keeps regular puppeteer
+// for cross-platform convenience.
+async function launchBrowser() {
+  if (process.env.VERCEL) {
+    const { default: puppeteerCore } = await import("puppeteer-core");
+    const { default: chromium } = await import("@sparticuz/chromium");
+    return puppeteerCore.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: true,
+    });
+  }
+  const { default: puppeteer } = await import("puppeteer");
+  return puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = resolve(__dirname, "..", "dist");
@@ -146,9 +166,7 @@ async function main() {
   const server = await startServer();
   console.log(`  static server: http://localhost:${PORT}`);
 
-  const browser = await puppeteer.launch({
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  const browser = await launchBrowser();
 
   let failed = 0;
   for (const r of routes) {
