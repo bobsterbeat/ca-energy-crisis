@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate-sitemap.js && vite build",
+    "build": "node scripts/generate-sitemap.js && vite build && node scripts/prerender.js && node scripts/verify-prerender.js",
+    "build:spa": "node scripts/generate-sitemap.js && vite build",
     "prerender": "node scripts/prerender.js",
     "verify": "node scripts/verify-prerender.js",
-    "release": "npm run build && npm run prerender && npm run verify",
     "lint": "eslint .",
     "preview": "vite preview"
   },
