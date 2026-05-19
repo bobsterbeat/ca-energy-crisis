@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-05-12",
+  "lastUpdated": "2026-05-19",
   "source": "U.S. Energy Information Administration (EIA)",
   "gasoline": {
-    "ca": 5.96,
-    "us": 4.45,
-    "tx": 3.88,
+    "ca": 5.97,
+    "us": 4.5,
+    "tx": 3.94,
     "asOf": "May 2026",
-    "period": "2026-05-04"
+    "period": "2026-05-11"
   },
   "electricity": {
     "ca": 33.2,
